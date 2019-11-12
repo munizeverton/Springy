@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+    apache:
+        build:
+            dockerfile: php7-apache2-dockerfile
+            context: .
+        image: munizeverton/php7-apache2-dockerfile
+        container_name: php7-apache2_teste
+        restart: always
+        ports:
+            - '80:80'
+        volumes:
+            - ../:/var
+        depends_on:
+            - mysql
+        links:
+            - mysql
+
+    mysql:
+        container_name: mysql_teste
+        image: mysql:5.7
+        restart: always
+        ports:
+            - '3306:3306'
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_DATABASE=teste
+            - MYSQL_USER=user
+            - MYSQL_PASSWORD=pass
