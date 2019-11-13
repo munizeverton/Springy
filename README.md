@@ -1,52 +1,25 @@
-# Springy
+## Instalação e configuração
 
-[![Build Status](https://travis-ci.org/fernandoval/Springy.svg?branch=master)](https://travis-ci.org/fernandoval/Springy)
-[![StyleCI](https://styleci.io/repos/26294247/shield)](https://styleci.io/repos/26294247)
-[![Codacy Badge](https://api.codacy.com/project/badge/grade/6152e69cbc7d433d8a151622e0f6be4b)](https://www.codacy.com/app/fval/Springy)
+Faça um clone do projeto
 
-A micro framework for smart PHP developers.
+`git clone https://github.com/munizeverton/Springy`
 
-> **WARNING!**
->
-> This project will be deprecated soon.
->
-> The new major release 5 is under development.
->
-> It will be not compatible with version 4, but comes with several new features and enhancements.
->
-> You can follow new project at https://github.com/springy-framework
+O container da aplicação pode ser levantado com o comando abaixo:
 
-## What is this
+`cd docker/ && docker-compose start`
 
-Springy is a micro [MVC](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) framework for coders who work with the [PHP](http://www.php.net) script language to develop web applications.
+Crie a tabela tests
 
-It was created based upon the KISS principle in which the simplicity is the base to good things.
+```
+create table tests
+(
+    id int auto_increment primary key,
+    name varchar(255) null,
+    created_at datetime null,
+    updated_at datetime default now() null,
+    deleted tinyint default 0 null
+);
+```
 
-## Requirements
 
-* PHP 7.0+
-* [Composer](https://getcomposer.org/) Dependency Manager for PHP
-
-## Language dependencies
-
-* [Multibyte String](http://php.net/manual/en/intro.mbstring.php) library
-* [Mcrypt](http://php.net/manual/en/intro.mcrypt.php) library
-
-## How do I start?
-
-Read the documentation:
-
-* [English](/documentation/en/README.md)
-* [Portuguese](/documentation/pt/README.md)
-
-## Contributing
-
-1. Fork it!
-2. Create your feature branch: `git checkout -b my-branch`
-3. Commit your changes: `git commit -m 'Description of your feature'`
-4. Push to the branch: `git push origin my-feature`
-5. Submit a pull request.
-
-## License
-
-This project is licensed under [The MIT License (MIT)](/documentation/MIT.txt).
+Após isso a aplicação está disponível em `http://localhost`
