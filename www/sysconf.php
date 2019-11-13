@@ -19,6 +19,7 @@ $GLOBALS['SYSTEM'] = [
     'CONSIDER_PORT_NUMBER' => false,
     'ENVIRONMENT_ALIAS'    => [
         'localhost'             => 'development',
+        'medportal-test.herokuapp.com' => 'development',
         '127\.0\.0\.1'          => 'development',
         '(www\.)?mydomain\.com' => 'production',
     ],
