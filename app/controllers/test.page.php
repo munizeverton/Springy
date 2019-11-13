@@ -9,9 +9,9 @@ class Test_Controller extends Controller
      */
     public function _default()
     {
-        $this->_template();
-        $this->template->assign('tests', $this->getList());
-        $this->template->display();
+        $tpl = $this->_template();
+        $tpl->assign('tests', $this->getList());
+        $tpl->display();
     }
 
     public function new()
