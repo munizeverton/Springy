@@ -65,6 +65,15 @@ $conf = [
     '_migration' => [
         'table_name' => '_database_version_control',
     ],
+    'default' => [
+        'database_type' => 'mysql',
+        'host_name'     => 'us-cdbr-iron-east-05.cleardb.net',
+        'user_name'     => 'bccce3916ed906',
+        'password'      => 'eb3bd97f',
+        'database'      => 'heroku_460f88c835a60bb',
+        'charset'       => 'utf8',
+        'persistent'    => false,
+    ],
 ];
 
 /**@}*/
