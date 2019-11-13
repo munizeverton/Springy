@@ -9,12 +9,9 @@ class Test_Controller extends Controller
      */
     public function _default()
     {
-        $tests = $this->getModel();
-        $tests->query();
-
-        $tpl = $this->_template();
-        $tpl->assign('tests', $tests->all());
-        $tpl->display();
+        $this->_template();
+        $this->template->assign('tests', $this->getList());
+        $this->template->display();
     }
 
     public function new()
@@ -31,9 +28,7 @@ class Test_Controller extends Controller
         if (!$tests->validate()) {
             $tpl = $this->_template();
             $tpl->assign('messages', $tests->validationErrors());
-            $tests = $this->getModel();
-            $tests->query();
-            $tpl->assign('tests', $tests->all());
+            $tpl->assign('tests', $this->getList());
             return $tpl->display();
         }
 
@@ -62,9 +57,7 @@ class Test_Controller extends Controller
         if (!$tests->validate()) {
             $tpl = $this->_template();
             $tpl->assign('messages', $tests->validationErrors());
-            $tests = $this->getModel();
-            $tests->query();
-            $tpl->assign('tests', $tests->all());
+            $tpl->assign('tests', $this->getList());
             return $tpl->display();
         }
 
@@ -104,5 +97,13 @@ class Test_Controller extends Controller
     private function getInput()
     {
         return new \Springy\Core\Input();
+    }
+
+    private function getList()
+    {
+        $tests = $this->getModel();
+        $tests->query();
+
+        return $tests->all();
     }
 }
