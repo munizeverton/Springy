@@ -21,7 +21,7 @@ $GLOBALS['SYSTEM'] = [
         'localhost'             => 'development',
         '127\.0\.0\.1'          => 'development',
         '(www\.)?mydomain\.com' => 'production',
-        'medportal-test.herokuapp.com' => 'production',
+        'medportal-test.herokuapp.com' => 'development',
     ],
 
     // Web server doc root directory
