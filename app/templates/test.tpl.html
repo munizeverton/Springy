@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+{strip}
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+		<title>{$SYSTEM_NAME} ({$SYSTEM_VERSION})</title>
+
+		<!-- Bootstrap -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<h1 class="text-center">Listagem</h1>
+		<div class="container">
+			<div class="row">
+				{if $messages && $messages->hasAny()}
+					{foreach from=$messages->all() item=message}
+						<div class="alert alert-danger" role="alert">{$message}</div>
+					{/foreach}
+				{/if}
+
+				<div class="col-md-12">
+					<div class="table-responsive">
+						<table id="tests-table" class="table table-bordered table-striped">
+							<thead>
+								<tr>
+									<th>Nome</th>
+									<th>Criado em</th>
+									<th>Ações</th>
+								</tr>
+							</thead>
+							<tbody>
+							{foreach from=$tests item=test}
+								<tr>
+									<td>{$test['name']}</td>
+									<td>{date('d/m/Y', strtotime($test['created_at']))}</td>
+									<td>
+										<button data-id="{$test['id']}" data-name="{$test['name']}" data-placement="top" data-toggle="tooltip" title="Editar" class="btn btn-primary btn-xs edit-btn">
+											<span class="glyphicon glyphicon-pencil" data-title="Edit" data-toggle="modal" data-target="#edit"></span>
+										</button>&nbsp;
+										<button data-id="{$test['id']}" data-placement="top" data-toggle="tooltip" title="Excluir" class="btn btn-danger btn-xs delete-btn">
+											<span class="glyphicon glyphicon-trash" data-title="Delete" data-toggle="modal" data-target="#delete"></span>
+										</button>
+									</td>
+								</tr>
+							{/foreach}
+							</tbody>
+						</table>
+
+						<div class="clearfix"></div>
+						<a class="btn btn-primary pull-right" data-toggle="modal" data-target="#new-modal">Novo</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form method="post" action="/test/edit">
+						<input type="hidden" name="id" id="edit-id">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+							<h4 class="modal-title custom_align" id="Heading">Alteração</h4>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<input class="form-control" name="name" id="name" type="text" placeholder="Nome">
+							</div>
+						</div>
+						<div class="modal-footer ">
+							<button type="submit" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Alterar</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form method="post" action="/test/delete">
+						<input type="hidden" name="id" id="delete-id">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+							<h4 class="modal-title custom_align" id="Heading">Excluir</h4>
+						</div>
+						<div class="modal-body">
+
+							<div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Tem certeza que deseja excluir esse registro?</div>
+
+						</div>
+						<div class="modal-footer ">
+							<button type="submit" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span> Sim</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Não</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="new-modal" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form method="post" action="/test/new">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+							<h4 class="modal-title custom_align" id="Heading">Novo</h4>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<input class="form-control" name="name" type="text" placeholder="Nome">
+							</div>
+						</div>
+						<div class="modal-footer ">
+							<button type="submit" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Salvar</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+		<script>
+			$(document).ready(function(){
+				$("[data-toggle=tooltip]").tooltip();
+			});
+
+			$('.edit-btn').on('click', function () {
+				$('#edit-id').val(($(this).data('id')));
+				$('#name').val(($(this).data('name')));
+			});
+
+			$('.delete-btn').on('click', function () {
+				$('#delete-id').val(($(this).data('id')));
+			});
+		</script>
+	</body>
+</html>
+{/strip}

@@ -8,7 +8,7 @@
  * @version   3.4.2.21
  */
 $GLOBALS['SYSTEM'] = [
-    'SYSTEM_NAME'       => 'Your system name',
+    'SYSTEM_NAME'       => 'Teste',
     'SYSTEM_VERSION'    => [1, 0, 0],
     'PROJECT_CODE_NAME' => '',
     'CHARSET'           => 'UTF-8',
@@ -21,6 +21,7 @@ $GLOBALS['SYSTEM'] = [
         'localhost'             => 'development',
         '127\.0\.0\.1'          => 'development',
         '(www\.)?mydomain\.com' => 'production',
+        'medportal-test.herokuapp.com' => 'development',
     ],
 
     // Web server doc root directory
